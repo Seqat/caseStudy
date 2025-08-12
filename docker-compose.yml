@@ -3,7 +3,7 @@ services:
   backend:
     build:
       context: ./backend/src
-      dockerfile: ../../docker/Dockerfile.backend
+      dockerfile: ../Dockerfile
     ports:
       - "5050:8080"
     environment:
