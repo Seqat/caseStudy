@@ -1,8 +1,8 @@
 # Use official .NET 8 SDK image for build
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /app
-COPY ../backend ./
-RUN dotnet publish ./src -c Release -o out
+COPY . ./
+RUN dotnet publish -c Release -o out
 
 # Use official .NET 8 ASP.NET runtime image for run
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime

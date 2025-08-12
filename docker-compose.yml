@@ -2,20 +2,14 @@ version: '3.8'
 services:
   backend:
     build:
-      context: ./backend
-      dockerfile: ../docker/Dockerfile.backend
+      context: ./backend/src
+      dockerfile: ../../docker/Dockerfile.backend
     ports:
-      - "5000:80"
+      - "5050:8080"
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
     depends_on:
       - db
-  frontend:
-    build:
-      context: ./frontend
-      dockerfile: ../docker/Dockerfile.frontend
-    ports:
-      - "3000:3000"
   db:
     image: postgres:16
     env_file:
