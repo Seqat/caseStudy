@@ -1,6 +1,9 @@
 # Use official .NET 8 SDK image for build
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /app
+# Install EF Core tools globally
+RUN dotnet tool install --global dotnet-ef
+ENV PATH="$PATH:/root/.dotnet/tools"
 COPY . ./
 RUN dotnet publish -c Release -o out
 

@@ -1,1 +1,30 @@
+bin/
+obj/
+
+# User secrets
+secrets.json
+
+# Environment files
 .env
+
+# VS Code
+.vscode/
+
+# Docker
+*.pid
+
+# Logs
+*.log
+
+# Node (if you add frontend again)
+node_modules/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Others
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
