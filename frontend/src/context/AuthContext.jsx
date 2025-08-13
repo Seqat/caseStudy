@@ -35,21 +35,27 @@ export const AuthProvider = ({ children }) => {
     initAuth()
   }, [])
 
-  const login = async (email, password) => {
-    try {
-      const response = await authAPI.login(email, password)
-      setToken(response.token)
-      setUser({ email: response.email })
-      localStorage.setItem('authToken', response.token)
-      return { success: true }
-    } catch (error) {
-      console.error('Login failed:', error)
-      return { 
-        success: false, 
-        message: error.response?.data?.message || 'Login failed' 
-      }
+const login = async (email, password) => {
+  try {
+    const response = await authAPI.login(email, password)
+    // support both axios-like (response.data) and direct data shapes
+    const data = response && response.data ? response.data : response
+
+    if (!data?.token) {
+      return { success: false, message: data?.message || 'No token returned' }
     }
+
+    setToken(data.token)
+    setUser({ email: data.email || email })
+    localStorage.setItem('authToken', data.token)
+    return { success: true }
+  } catch (error) {
+    console.error('Login failed:', error)
+    const message = error?.response?.data?.message ?? error?.message ?? 'Login failed'
+    return { success: false, message }
   }
+}
+
 
   const register = async (email, password) => {
     try {
