@@ -45,7 +45,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend",
         policy =>
-        {
+        {   // Get allowed origins from configuration
             var allowedOrigins = builder.Configuration.GetSection("CORS:AllowedOrigins").Get<string[]>()
                 ?? new[] { "http://localhost:3000" };
 

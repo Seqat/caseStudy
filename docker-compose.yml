@@ -27,8 +27,9 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     environment:
+      # TODO: Use environment variables for sensitive data later
       - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=http://+:80
+      - ASPNETCORE_URLS=http://+:8080
       - ConnectionStrings__DefaultConnection=Host=postgres;Database=authdb;Username=postgres;Password=postgres123
       - JWT__SecretKey=your-super-secret-jwt-key-that-should-be-at-least-32-characters-long
       - JWT__Issuer=AuthApp
@@ -41,11 +42,6 @@ services:
         condition: service_healthy
     networks:
       - app-network
-    volumes:
-      - ./backend:/app
-      - /app/bin
-      - /app/obj
-
   # React Frontend
   frontend:
     build:
