@@ -7,7 +7,9 @@ const Login = () => {
     email: '',
     password: ''
   })
+
   const [error, setError] = useState('')
+  const [showError, setShowError] = useState(false)
   const [loading, setLoading] = useState(false)
   
   const { login } = useAuth()
@@ -28,14 +30,15 @@ const Login = () => {
 
     const result = await login(formData.email, formData.password)
     
-    if (result.success) {
-      navigate('/dashboard')
-    } else {
-      setError(result.message)
-    }
-    
-    setLoading(false)
+  if (result.success) {
+    navigate('/dashboard')
+  }  else {
+    setError(result.message)
+    setLoading(false) // Set loading to false immediately
+    setShowError(true)
   }
+}
+
 
   return (
     <div className="auth-container">
@@ -70,7 +73,7 @@ const Login = () => {
             />
           </div>
 
-          {error && (
+          {showError && (
             <div className="error-message" data-testid="error-message">
               {error}
             </div>

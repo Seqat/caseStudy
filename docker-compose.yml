@@ -1,11 +1,10 @@
-version: '3.8'
 
 services:
   # PostgreSQL Database
   postgres:
     image: postgres:16-alpine
     environment:
-    # TODO: Use environment variables for sensitive data later
+    # TODO: Use .env for sensitive data later
       POSTGRES_DB: authdb
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres123
@@ -27,7 +26,7 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     environment:
-      # TODO: Use environment variables for sensitive data later
+      # TODO: Use .env for sensitive data later
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:8080
       - ConnectionStrings__DefaultConnection=Host=postgres;Database=authdb;Username=postgres;Password=postgres123
